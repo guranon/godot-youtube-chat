@@ -58,7 +58,7 @@ func test_parse_custom_emoji():
 	assert_true(emoji.is_custom_emoji)
 	assert_eq(emoji.emoji_text, ":customEmoji:")
 
-func test_parse_membership():
+func test_parse_from_membership():
 	var res = load_json("res://test/testdata/get_live_chat.from-member.json")
 	var result = YTParser.parse_chat_data(res)
 	var chat_items: Array = result[0]
@@ -67,6 +67,26 @@ func test_parse_membership():
 	assert_true(chat.is_membership)
 	assert_eq(chat.author.badge.label, "メンバー（6 か月）")
 	assert_eq(chat.author.badge.thumbnail.url, "https://membership.badge.url")
+
+func test_parse_subscribe_membership():
+	var res = load_json("res://test/testdata/get_live_chat.subscribe-member.json")
+	var result = YTParser.parse_chat_data(res)
+	var chat_items: Array = result[0]
+
+	var chat: ChatItem = chat_items[0]
+	assert_eq(chat.id, "id")
+	assert_eq(chat.author.name, "authorName")
+	assert_eq(chat.author.thumbnail.url, "https://author.thumbnail.url")
+	assert_eq(chat.author.channel_id, "channelId")
+	assert_eq(chat.author.badge.label, "新規メンバー")
+	assert_eq(chat.author.badge.thumbnail.url, "https://membership.badge.url")
+	assert_eq(chat.author.badge.thumbnail.alt, "新規メンバー")
+	assert_eq(chat.message[0].text, "上級エンジニア")
+	assert_eq(chat.message[1].text, " へようこそ！")
+	assert_true(chat.is_membership)
+	assert_false(chat.is_verified)
+	assert_false(chat.is_owner)
+	assert_false(chat.is_moderator)
 
 func test_parse_superchat():
 	var res = load_json("res://test/testdata/get_live_chat.super-chat.json")
