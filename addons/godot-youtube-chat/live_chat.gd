@@ -13,14 +13,13 @@ signal error_occurred(message: String)
 @export_group("YouTube ID (set one of these)")
 ## Only one of these needs to be set. If multiple are set, priority is channel_id > live_id > handle.
 @export var channel_id: String = ""
-@export var live_id_input: String = ""
+@export var live_id: String = ""
 @export var handle: String = ""
 
 @export_group("Other")
 @export var interval_ms: int = 1000
 
 # --- Internal state ---
-var live_id: String = ""
 var _options: FetchOptions = null
 var _timer: Timer
 
@@ -101,8 +100,8 @@ func _execute() -> void:
 func _build_youtube_id() -> Dictionary:
 	if channel_id != "":
 		return {"channel_id": channel_id}
-	elif live_id_input != "":
-		return {"live_id": live_id_input}
+	elif live_id != "":
+		return {"live_id": live_id}
 	elif handle != "":
 		return {"handle": handle}
 	return {}
