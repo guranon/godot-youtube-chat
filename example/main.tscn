@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://mtryhthphkug"]
+
+[ext_resource type="Script" uid="uid://ddehfydh4hjko" path="res://addons/godot-youtube-chat/live_chat.gd" id="1_ca0d4"]
+[ext_resource type="Script" uid="uid://u0g8bdb3ibrk" path="res://addons/godot-youtube-chat/requests.gd" id="2_85x0u"]
+[ext_resource type="Script" uid="uid://dcud10jei0khl" path="res://example/test_chat_received.gd" id="3_bfisx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="YTLiveChat" type="Node" parent="." node_paths=PackedStringArray("requests")]
+script = ExtResource("1_ca0d4")
+requests = NodePath("YTRequests")
+metadata/_custom_type_script = "uid://ddehfydh4hjko"
+
+[node name="YTRequests" type="Node" parent="YTLiveChat"]
+script = ExtResource("2_85x0u")
+metadata/_custom_type_script = "uid://u0g8bdb3ibrk"
+
+[node name="Node" type="Node" parent="." node_paths=PackedStringArray("live_chat")]
+script = ExtResource("3_bfisx")
+live_chat = NodePath("../YTLiveChat")
