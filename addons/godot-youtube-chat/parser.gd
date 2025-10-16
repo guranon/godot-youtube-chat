@@ -89,6 +89,7 @@ static func _parse_action_to_chat_item(action: Dictionary) -> ChatItem:
 	chat.is_verified = false
 	chat.is_moderator = false
 	chat.timestamp = int(renderer.get("timestampUsec", "0").to_int() / 1000)
+	chat.is_membership_chat = action["addChatItemAction"]["item"].has("liveChatMembershipItemRenderer")
 
 	# Badges
 	if renderer.has("authorBadges"):

@@ -87,6 +87,7 @@ func test_parse_subscribe_membership():
 	assert_false(chat.is_verified)
 	assert_false(chat.is_owner)
 	assert_false(chat.is_moderator)
+	assert_true(chat.is_membership_chat)
 
 func test_parse_superchat():
 	var res = load_json("res://test/testdata/get_live_chat.super-chat.json")
