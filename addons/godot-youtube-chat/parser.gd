@@ -156,8 +156,17 @@ static func get_options_from_live_page(data: String) -> Dictionary:
 	if id_match:
 		options["live_id"] = id_match.get_string(1)
 	else:
-		push_error("Live Stream was not found")
-		return {}
+		# fallback
+		var alt_id_regex := RegEx.new()
+		# example:
+		# <link rel="alternate" media="handheld" href="https://m.youtube.com/watch?v=(id)">
+		alt_id_regex.compile("<link rel=\"alternate\".*href=\"https:\\/\\/(?:m\\.)?(?:www\\.)?youtube.com\\/watch\\?v=(.+?)\">")
+		var alt_id_match := alt_id_regex.search(data)
+		if alt_id_match:
+			options["live_id"] = alt_id_match.get_string(1)
+		else:
+			push_error("Live Stream was not found")
+			return {}
 
 	# --- Replay check ---
 	var replay_regex = RegEx.new()
