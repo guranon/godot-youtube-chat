@@ -4,6 +4,10 @@
 ☢ ***You will need to take full responsibility for your action*** ☢
 
 ## Usage
+Copy the [`addons/godot-youtube-chat`](addons/godot-youtube-chat) folder to your project. 
+
+(Optionally add [`example`](example) for a small example that prints to console, or [`test`](test) and [`addons/gut`](addons/gut) for unit tests.)
+
 In a scene:
 - Add a `YTLiveChat` node
 - Add a `YTRequests` node
@@ -23,6 +27,11 @@ In a scene:
 - Call `start()` on the `YTLiveChat` node to connect to chat and start emitting `chat_received` signals.
 
 See [`example.tscn`](example/example.tscn) for an example.
+
+## Tests
+This project uses [Godot Unit Test (GUT)](https://github.com/bitwes/Gut) for unit tests (currently only [test_parser.gd](test/unit/test_parser.gd)).
+
+To run tests, go to Project Settings -> Ensure the Gut plugin is enabled -> In the bottom GUT tab, you can run tests.
 
 ## Notes
 Heavily based on https://github.com/LinaTsukusu/youtube-chat.
